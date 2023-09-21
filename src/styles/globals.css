@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Poppins:wght@700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #F8FAFF;
+}
+
+.logo {
+    font-family: 'Poppins', sans-serif;
+}
+
+.primary-bg {
+    background: #F8FAFF;
+}
+
+.secondary-bg {
+    background-color: #4285F4;
+}
+
+.secondary-text {
+    color: #4285F4;
+}
+
+a {
+    color: #346BD4;
+}
+
+.card-shadow{
+    box-shadow:  4px 4px 20px 0px rgba(0, 0, 0, 0.10);
+}
+
+.secondary-bg-gradient {
+    background: linear-gradient(180deg, #4285F4 0%, #286DE0 100%);
+}
+
+.sidebar-gradient {
+    background: linear-gradient(180deg, #4285F4 0%, #3C83F9 100%);
+
+}
+
+.link {
+    color: #346BD4;
+}
