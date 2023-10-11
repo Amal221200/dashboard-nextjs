@@ -4,6 +4,7 @@ import AuthProvider from '@/providers/AuthProvider'
 import ToastProvider from '@/providers/ToastProvider'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
+import { Session } from 'next-auth'
 
 export const metadata: Metadata = {
   title: 'Dashboard | Home',
@@ -12,12 +13,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  session
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  session: Session
 }) {
   return (
     <html lang="en">
-      <AuthProvider>
+      <AuthProvider session={session}>
         <body>
           <ClientOnly>
             <ToastProvider />

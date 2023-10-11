@@ -6,9 +6,7 @@ const AuthProvider = ({ children, session }: { children: React.ReactNode, sessio
 
     return (
         <SessionProvider session={session}>
-            <>
-                {children}
-            </>
+            {children}
         </SessionProvider>
     )
 }

@@ -7,7 +7,7 @@ export const metadata = {
 const LoginPage = () => {
   
   return (
-    <Form title='Sign In' subtitle='Sign In to you account' />
+    <Form title='Log In' subtitle='Login to you account' />
   )
 }
 export default LoginPage

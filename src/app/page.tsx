@@ -9,7 +9,7 @@ import Top from "@/components/Top";
 const Home = async () => {
 
   const session = await getServerSession();
-
+// 
   if (!session?.user) {
     redirect("/login");
   }

@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useCallback, useState } from "react";
 import toast from "react-hot-toast";
@@ -35,8 +35,8 @@ const Form: React.FC<FormProps> = ({ title, subtitle }) => {
     }, [setDisable, title, router])
 
     return (
-        <div className="w-full flex lg:justify-center justify-end items-center h-full p-6">
-            <div className="lg:w-[400px] w-[350px] md:block hidden">
+        <div className="flex lg:justify-center justify-end items-center p-6 bg-primary rounded-lg">
+            <div className="lg:w-[400px] max-w-[350px] md:block">
                 <h2 className="text-left w-full font-bold 2xl:text-4xl text-2xl">{title}</h2>
                 <p className="text-base font-medium">{subtitle}</p>
                 <div className="flex gap-4 my-10">

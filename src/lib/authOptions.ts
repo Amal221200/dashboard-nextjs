@@ -45,6 +45,7 @@ const authOptions: AuthOptions = {
     ],
     callbacks: {
         async session({ session }) {
+            await connectToDB()
             const sessionUser = await User.findOne({
                 email: session.user?.email
             })
