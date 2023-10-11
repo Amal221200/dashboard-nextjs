@@ -7,18 +7,18 @@ ChartJS.register(
     ArcElement, Tooltip, Legend
 )
 
-export const DoughnutData = {
-    labels: ['Basic Tees', 'Custom Short Pants', 'Super Hoodies'], datasets: [{
-        label: '',
-        data: [55, 31, 14],
-        backgroundColor: ['#98D89E', '#F6DC7D', '#EE8484']
-    }]
-}
+// const DoughnutData = {
+//     labels: ['Basic Tees', 'Custom Short Pants', 'Super Hoodies'], datasets: [{
+//         label: '',
+//         data: [55, 31, 14],
+//         backgroundColor: ['#98D89E', '#F6DC7D', '#EE8484']
+//     }]
+// }
 
 const BottomLeft = () => {
 
     return (
-        <CardWrapper additionalClassNames="flex-1 h-[500px] flex justify-center">
+        <CardWrapper additionalClassNames="relative w-full h-full m-auto">
             <Doughnut data={{
                 labels: ['Basic Tees', 'Custom Short Pants', 'Super Hoodies'],
                 datasets: [
@@ -26,12 +26,13 @@ const BottomLeft = () => {
                         label: '',
                         data: [55, 31, 14],
                         backgroundColor: ['#98D89E', '#F6DC7D', '#EE8484'],
-                        weight: 30
+                        weight: 30,
+                        borderJoinStyle: 'bevel',
+                        // clip: {left: 5, top: 10, right: -2, bottom: 10}
                     },
                 ]
             }} options={{
-                responsive: true,
-                spacing: 0,
+                maintainAspectRatio: false,
             }} className='' />
         </CardWrapper>
     )

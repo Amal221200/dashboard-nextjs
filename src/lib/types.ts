@@ -5,6 +5,18 @@ export interface BasicFCProps {
     children: React.ReactNode
 }
 
+export interface user {
+    basic: {
+        name: string,
+        email: string,
+        phone: string,
+    },
+    socialLinks: {
+        instagram: string,
+        youtube: string,
+    }
+}
+
 export interface socialLinkType {
     href: string,
     title: string,

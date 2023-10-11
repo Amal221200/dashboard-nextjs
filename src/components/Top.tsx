@@ -4,7 +4,7 @@ import { TopContents } from "@/lib/constants"
 
 const Top = () => {
   return (
-    <section className="grid md:grid-cols-4 grid-cols-2 gap-4">
+    <section className="grid md:grid-cols-4 grid-cols-2 gap-4 p-3">
       {
         TopContents.map((content, ind) => (
           <TopCard key={ind} content={content}  />

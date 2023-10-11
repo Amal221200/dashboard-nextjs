@@ -7,7 +7,9 @@ export const metadata = {
 
 const SignupPage = () => {
   return (
-    <Form title="Sign up" subtitle="Create an account" />
+    <div>
+      <Form title="Sign up" subtitle="Create an account" />
+    </div>
   )
 }
 export default SignupPage

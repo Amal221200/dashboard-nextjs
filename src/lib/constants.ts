@@ -1,10 +1,42 @@
-import { TopContentType } from "@/lib/types"
-import { BsTags } from "react-icons/bs"
-import { LiaWalletSolid } from "react-icons/lia"
+import { BsTags } from "react-icons/bs";
+import { LiaWalletSolid } from "react-icons/lia";
 import { AiFillTwitterCircle, AiFillGithub, AiFillLinkedin, AiOutlineLike } from 'react-icons/ai'
 import { LuUsers2 } from 'react-icons/lu'
 import { IoLogoDiscord } from 'react-icons/io5'
-import { socialLinkType } from './types'
+import { FiPieChart } from 'react-icons/fi';
+import { BsGear, BsTagsFill } from 'react-icons/bs';
+import { AiOutlineSchedule } from 'react-icons/ai';
+import { CgProfile } from 'react-icons/cg';
+import { TopContentType, socialLinkType } from "./types";
+
+export const sideBarLinks = [
+    {
+        href: "/",
+        Icon: FiPieChart,
+        title: 'DashBoard',
+    },
+    {
+        href: "/",
+        Icon: BsTagsFill,
+        title: 'Transactions',
+    },
+    {
+        href: "/",
+        Icon: AiOutlineSchedule,
+        title: 'Schedules',
+    },
+    {
+        href: "/",
+        Icon: CgProfile,
+        title: 'Users',
+    },
+    {
+        href: "/",
+        Icon: BsGear,
+        title: 'Settings',
+    },
+]
+
 
 export const regexPattern = {
     email: /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
@@ -42,6 +74,8 @@ export const socialLinks: socialLinkType[] = [
         // height: 48
     },
 ]
+
+export const toSnakeCase = (name: string) => name.toLowerCase().replace(/[\s]/g, "_")
 
 export const TopContents: TopContentType[] = [
     {
@@ -82,6 +116,6 @@ export const TopContents: TopContentType[] = [
 export const GraphDataLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4']
 
 export const GraphDataSets = [
-    { label: 'Guest', data: [231, 225, 283, 91, 445], backgroundColor: '#98D89E', barThickness: 46, borderRadius: 5 },
-    { label: 'User', data: [213, 71, 352, 180, 271], backgroundColor: '#EE8484', barThickness: 46, borderRadius: 5 }
+    { label: 'Guest', data: [231, 225, 283, 91, 445], backgroundColor: '#98D89E', barThickness: 38, borderRadius: 5 },
+    { label: 'User', data: [213, 71, 352, 180, 271], backgroundColor: '#EE8484', barThickness: 38, borderRadius: 5 }
 ]

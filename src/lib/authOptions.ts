@@ -23,17 +23,14 @@ const authOptions: AuthOptions = {
                     throw new Error('Invalid credentials');
                 }
 
-                const user = await User.findOne({
-                    where: {
-                        email: credentials.email
-                    }
-                });
+                // console.log(credentials)
 
-                console.log(user)
+                const user = await User.findOne({ email: credentials.email });
 
                 if (!user || !user?.password) {
                     throw new Error('Invalid credentials');
                 }
+                // console.log(user)
 
                 const isCorrectPassword = await bcrypt.compare(
                     credentials.password,
@@ -54,15 +51,17 @@ const authOptions: AuthOptions = {
                 email: session.user?.email
             })
 
-            if (session.user) {
-                session.user = { ...sessionUser, id:sessionUser._id.toString() };
+            console.log(sessionUser)
 
+            if (session.user) {
+                session.user = { ...sessionUser, id: sessionUser._id.toString() };
             }
 
             return session;
         },
         async signIn({ user, account, profile, email, credentials }) {
             try {
+                if (!profile) return true
                 await connectToDB()
                 // check if a user already exists
                 const userExists = await User.findOne({ email: profile?.email })

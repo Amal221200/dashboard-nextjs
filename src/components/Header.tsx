@@ -1,10 +1,10 @@
-import { AiOutlineBell, AiOutlineSearch } from "react-icons/ai"
-import { FaUserCircle } from "react-icons/fa"
-import ToggleMenu from "./ToggleMenu"
+import { AiOutlineBell, AiOutlineSearch } from 'react-icons/ai'
+import { FaUserCircle } from 'react-icons/fa'
+import ToggleMenu from './ToggleMenu';
 
 const Header = () => {
   return (
-    <header className="flex justify-between px-4 mb-5 items-center">
+    <header className="flex justify-between px-4 py-2 sm:py-0 mb-5 items-center">
       <div className="flex items-center gap-4">
         <ToggleMenu />
         <h3 className="text-xl">Dashboard</h3>
@@ -20,6 +20,7 @@ const Header = () => {
         </div>
       </div>
     </header>
-  )
+  );
 }
-export default Header
+
+export default Header;

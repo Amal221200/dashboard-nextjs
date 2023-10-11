@@ -8,7 +8,7 @@ interface ToggleMenuStore {
 
 const useToggleMenu = create<ToggleMenuStore>(
     (set) => ({
-        isOpen: true,
+        isOpen: false,
         onOpen() {
             set({ isOpen: true })
         },

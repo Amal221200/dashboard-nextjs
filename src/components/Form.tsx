@@ -1,8 +1,8 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { signIn,useSession } from "next-auth/react";
 import { FormEvent, useCallback, useState } from "react";
-import toast from "react-hot-toast/headless";
+import toast from "react-hot-toast";
 
 interface FormProps {
     title: string,
@@ -12,28 +12,32 @@ interface FormProps {
 
 const Form: React.FC<FormProps> = ({ title, subtitle }) => {
     const [disable, setDisable] = useState<boolean>(false)
+    console.log(useSession().status)
     const handleSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
         setDisable(true);
-        // const res = await signIn('credentials', {
-        //     email: formData.get('email'),
-        //     password: formData.get('password')
-        // })
-        // if (res?.ok) {
-        //     console.log()
-        // }
-        toast.success('Signed in succesfully')
-        console.log('first')
-        setDisable(false);
-    }, [setDisable])
+        const userData = { email: formData.get('email'), password: formData.get('password') }
+        const res = title === 'Sign In' ? await signIn('credentials', userData) : await fetch(`/api/register`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
+        })
+        if (res?.ok) {
+            toast.success('Signed in succesfully')
+            setDisable(false);
+        }
+
+    }, [setDisable, title])
     return (
         <div className="w-full flex lg:justify-center justify-end items-center h-full p-6">
             <div className="lg:w-[400px] w-[350px] md:block hidden">
                 <h2 className="text-left w-full font-bold 2xl:text-4xl text-2xl">{title}</h2>
                 <p className="text-base font-medium">{subtitle}</p>
                 <div className="flex gap-4 my-10">
-                    <button type="button" className="flex-1 bg-white rounded-lg px-4 text-[#858585] py-2 transition-colors hover:bg-[#858585] hover:text-slate-100">Google</button>
+                    <button type="button" className="flex-1 bg-white rounded-lg px-4 text-[#858585] py-2 transition-colors hover:bg-[#858585] hover:text-slate-100" onClick={()=> {signIn('google')}}>Google</button>
                     <button type="button" className="flex-1 bg-white rounded-lg px-4 text-[#858585] py-2 transition-colors hover:bg-[#858585] hover:text-slate-100">Apple</button>
                 </div>
                 <form className="w-full flex flex-col gap-5 bg-white rounded-2xl p-10" onSubmit={handleSubmit}>

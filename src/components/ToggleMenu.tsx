@@ -1,9 +1,9 @@
-"use client"
-import { FaBarsStaggered } from "react-icons/fa6"
-import { sideBarLinks } from "./SideBar"
-import Link from "next/link"
-import useToggleMenu from "@/hooks/useToggleMenu"
-import { useCallback } from "react"
+"use client";
+import { FaBarsStaggered } from "react-icons/fa6";
+import { sideBarLinks } from "@/lib/constants";
+import useToggleMenu from "@/hooks/useToggleMenu";
+import { useCallback } from "react";
+import Link from "next/link";
 
 const ToggleMenu = () => {
     const toggleMenu = useToggleMenu();
@@ -17,11 +17,11 @@ const ToggleMenu = () => {
 
     return (
         <div className={`relative sm:hidden block`} onClick={hanndleToggle}>
-            <FaBarsStaggered className={`text-xl cursor-pointer ${toggleMenu.isOpen ? 'secondary-text' : 'text-black'}`} />
+            <FaBarsStaggered className={`text-xl cursor-pointer ${toggleMenu.isOpen ? 'text-secondary' : 'text-black'}`} />
             {
                 toggleMenu.isOpen &&
                 (
-                    <section className={`absolute top-[125%] -left-3 text-white p-4 sidebar-gradient rounded-2xl sm:hidden block`}>
+                    <section className={`absolute top-[125%] -left-3 text-white p-4 bg-sidebar_gradient rounded-2xl sm:hidden block`}>
                         <nav className="flex flex-col md:gap-4 gap-2 flex-grow-[3] items-start">
                             {
                                 sideBarLinks.map((sideBarLink, ind) => (

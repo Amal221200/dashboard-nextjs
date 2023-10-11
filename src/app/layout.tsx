@@ -1,4 +1,6 @@
+import ClientOnly from '@/components/ClientOnly'
 import AuthProvider from '@/providers/AuthProvider'
+import ToastProvider from '@/providers/ToastProvider'
 import '@/styles/globals.css'
 import type { Metadata } from 'next'
 
@@ -15,7 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider>
-        <body>{children}</body>
+        <body>
+          <ClientOnly>
+            <ToastProvider />
+          </ClientOnly>
+          {children}
+        </body>
       </AuthProvider>
     </html>
   )

@@ -3,21 +3,20 @@ import Middle from "@/components/Middle";
 import SideBar from "@/components/SideBar";
 import Bottom from "@/components/Bottom/Bottom";
 import Top from "@/components/Top";
-import ProfileForm from "@/components/ProfileCard/ProfileForm";
-
+import ProfileModal from "@/components/ProfileModal/ProfileModal";
 export default function Home() {
 
   return (
     <>
-      <ProfileForm />
-      <main className="flex md:p-10 px-2 py-4 md:gap-5 gap-3 ">
+      <ProfileModal />
+      <main className="flex items-center px-3 h-full md:gap-4 sm:gap-2">
         <SideBar />
-        <div className="flex-grow-[4]">
+        <aside className="flex-grow-[6] sm:p-3 h-screen sm:overflow-y-scroll sm:scrollbar">
           <Header />
           <Top />
           <Middle />
           <Bottom />
-        </div>
+        </aside>
       </main>
     </>
   )
