@@ -29,17 +29,22 @@ const Form: React.FC<FormProps> = ({ title, subtitle }) => {
         if (res?.ok) {
             toast.success('Signed in succesfully')
             setDisable(false);
-            router.push('/dashboard')
+            router.push('/')
         }
 
     }, [setDisable, title, router])
+
     return (
         <div className="w-full flex lg:justify-center justify-end items-center h-full p-6">
             <div className="lg:w-[400px] w-[350px] md:block hidden">
                 <h2 className="text-left w-full font-bold 2xl:text-4xl text-2xl">{title}</h2>
                 <p className="text-base font-medium">{subtitle}</p>
                 <div className="flex gap-4 my-10">
-                    <button type="button" className="flex-1 bg-white rounded-lg px-4 text-[#858585] py-2 transition-colors hover:bg-[#858585] hover:text-slate-100" onClick={async () => { await signIn('google'); router.push('/dashboard') }}>Google</button>
+                    <button type="button" className="flex-1 bg-white rounded-lg px-4 text-[#858585] py-2 transition-colors hover:bg-[#858585] hover:text-slate-100" onClick={async () => {
+                        await signIn('google', {
+                            callbackUrl: '/'
+                        })
+                    }}>Google</button>
                     <button type="button" className="flex-1 bg-white rounded-lg px-4 text-[#858585] py-2 transition-colors hover:bg-[#858585] hover:text-slate-100">Apple</button>
                 </div>
                 <form className="w-full flex flex-col gap-5 bg-white rounded-2xl p-10" onSubmit={handleSubmit}>

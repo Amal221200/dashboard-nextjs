@@ -9,16 +9,6 @@ import { connectToDB } from './database';
 const authOptions: AuthOptions = {
     providers: [
         GoogleProvider({
-            // profile(profile: GoogleProfile) {
-            //     return {
-            //         ...profile,
-            //         name: profile.name,
-            //         email: profile.email,
-            //         image: profile.picture,
-            //         // id: profile?.id.toString()
-            //         id: profile.aud
-            //     }
-            // },
             clientId: process.env.GOOGLE_CLIENT as string,
             clientSecret: process.env.GOOGLE_SECRET as string,
         }),
@@ -34,14 +24,11 @@ const authOptions: AuthOptions = {
                     throw new Error('Invalid credentials');
                 }
 
-                // console.log(credentials)
-
                 const user = await User.findOne({ email: credentials.email });
 
                 if (!user || !user?.password) {
                     throw new Error('Invalid credentials');
                 }
-                // console.log(user)
 
                 const isCorrectPassword = await bcrypt.compare(
                     credentials.password,
@@ -62,9 +49,8 @@ const authOptions: AuthOptions = {
                 email: session.user?.email
             })
 
-
             if (session.user) {
-                session.user = { ...sessionUser, id: sessionUser._id.toString() };
+                session.user = { ...sessionUser, id: sessionUser._id.toString(), image: sessionUser.image };
             }
 
             return session;
@@ -73,14 +59,13 @@ const authOptions: AuthOptions = {
             try {
                 if (!profile) return true
                 await connectToDB()
-                // check if a user already exists
                 const userExists = await User.findOne({ email: profile?.email })
                 // if not create a new user
                 if (!userExists) {
                     await User.create({
-                        email: profile?.email,
-                        name: profile?.name,
-                        image: profile?.picture
+                        email: user?.email,
+                        name: user?.name,
+                        image: user?.image
                     })
                 }
                 return true;
