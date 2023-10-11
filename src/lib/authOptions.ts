@@ -26,6 +26,7 @@ const authOptions: AuthOptions = {
 
                 const user = await User.findOne({ email: credentials.email });
 
+
                 if (!user || !user?.password) {
                     throw new Error('Invalid credentials');
                 }
@@ -34,11 +35,11 @@ const authOptions: AuthOptions = {
                     credentials.password,
                     user.password
                 );
-
+                
                 if (!isCorrectPassword) {
                     throw new Error('Invalid credentials');
                 }
-
+                
                 return user;
             }
         })

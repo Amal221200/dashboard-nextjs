@@ -5,7 +5,7 @@ import type { Session } from 'next-auth'
 const AuthProvider = ({ children, session }: { children: React.ReactNode, session: Session }) => {
 
     return (
-        <SessionProvider session={session}>
+        <SessionProvider session={session} basePath='/api/auth'>
             {children}
         </SessionProvider>
     )

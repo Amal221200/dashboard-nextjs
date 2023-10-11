@@ -16,20 +16,36 @@ const Form: React.FC<FormProps> = ({ title, subtitle }) => {
     const router = useRouter()
     const handleSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const formData = new FormData(e.target as HTMLFormElement);
-        setDisable(true);
-        const userData = { email: formData.get('email'), password: formData.get('password') }
-        const res = title === 'Sign In' ? await signIn('credentials', userData) : await fetch(`/api/register`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(userData)
-        })
-        if (res?.ok) {
-            toast.success('Signed in succesfully')
+        try {
+            const formData = new FormData(e.target as HTMLFormElement);
+            setDisable(true);
+            const userData = { email: formData.get('email'), password: formData.get('password') }
+            if (title === 'Sign In') {
+                await signIn('credentials', { ...userData, callbackUrl: '/' })
+                toast.success('Signed in succesfully');
+            } else {
+                const response = await fetch(`/api/register`, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(userData)
+                })
+
+                if (response?.status === 409) {
+                    return toast.error("Email already exists")
+                }
+                
+                toast.success('Created an acount!');
+                router.push("/")
+            }
+        } catch (error: any) {
+            console.log(error);
+            if (error?.response?.status === 409) {
+                return toast.error("Email already exists")
+            }
+        } finally {
             setDisable(false);
-            router.push('/')
         }
 
     }, [setDisable, title, router])
@@ -57,7 +73,7 @@ const Form: React.FC<FormProps> = ({ title, subtitle }) => {
                         <input type="password" name="password" placeholder="Enter your password" autoComplete="current-password" className="w-full px-4 py-2 bg-[#f5f5f5] rounded-md outline-none" />
                     </div>
                     <a href="#" className="">Forgot password?</a>
-                    <button type="submit" className="w-full px-4 py-2 text-center rounded-md bg-secondary transition-colors text-white hover:bg-[#426cb1]" disabled={disable}>Submit</button>
+                    <button type="submit" className="w-full px-4 py-2 text-center rounded-md bg-secondary transition-colors text-white hover:bg-[#426cb1] disabled:cursor-not-allowed" disabled={disable}>Submit</button>
                 </form>
             </div>
         </div>
