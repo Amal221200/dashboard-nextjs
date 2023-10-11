@@ -1,6 +1,8 @@
+
 import { AiOutlineBell, AiOutlineSearch } from 'react-icons/ai'
 import { FaUserCircle } from 'react-icons/fa'
-import ToggleMenu from './ToggleMenu';
+import ToggleMenu from '../ToggleMenu';
+import HeaderProfile from './HeaderProfile';
 
 const Header = () => {
   return (
@@ -16,7 +18,7 @@ const Header = () => {
         </form>
         <AiOutlineBell className="text-xl" />
         <div>
-          <FaUserCircle className="text-xl" />
+          <HeaderProfile />
         </div>
       </div>
     </header>

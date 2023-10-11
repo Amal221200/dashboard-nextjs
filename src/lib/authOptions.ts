@@ -1,6 +1,7 @@
 import { AuthOptions } from 'next-auth';
 import bcrypt from 'bcrypt';
 import GoogleProvider from 'next-auth/providers/google';
+import { GoogleProfile } from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import User from '@/models/User';
 import { connectToDB } from './database';
@@ -8,6 +9,16 @@ import { connectToDB } from './database';
 const authOptions: AuthOptions = {
     providers: [
         GoogleProvider({
+            // profile(profile: GoogleProfile) {
+            //     return {
+            //         ...profile,
+            //         name: profile.name,
+            //         email: profile.email,
+            //         image: profile.picture,
+            //         // id: profile?.id.toString()
+            //         id: profile.aud
+            //     }
+            // },
             clientId: process.env.GOOGLE_CLIENT as string,
             clientSecret: process.env.GOOGLE_SECRET as string,
         }),
@@ -51,7 +62,6 @@ const authOptions: AuthOptions = {
                 email: session.user?.email
             })
 
-            console.log(sessionUser)
 
             if (session.user) {
                 session.user = { ...sessionUser, id: sessionUser._id.toString() };
@@ -70,7 +80,7 @@ const authOptions: AuthOptions = {
                     await User.create({
                         email: profile?.email,
                         name: profile?.name,
-                        image: profile?.image
+                        image: profile?.picture
                     })
                 }
                 return true;

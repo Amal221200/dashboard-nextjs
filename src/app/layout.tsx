@@ -1,4 +1,5 @@
 import ClientOnly from '@/components/ClientOnly'
+import ProfileModal from '@/components/ProfileModal/ProfileModal'
 import AuthProvider from '@/providers/AuthProvider'
 import ToastProvider from '@/providers/ToastProvider'
 import '@/styles/globals.css'
@@ -20,6 +21,7 @@ export default function RootLayout({
         <body>
           <ClientOnly>
             <ToastProvider />
+            <ProfileModal />
           </ClientOnly>
           {children}
         </body>

@@ -23,17 +23,17 @@ const BottomRight = () => {
         (
           <div className="h-full w-full" onClick={handleClick}>
             <h4 className="my-9 font-bold">{user.basic.name}</h4>
-            <div className="flex justify-start items-end gap-5 flex-1">
-              <div className="flex flex-col gap-2">
+            <div className="flex flex-wrap justify-start items-end w-full gap-5 flex-1">
+              <div className="flex flex-col w-full gap-2">
                 <p className="flex items-center gap-3">
                   <div className="p-2 rounded-full bg-emerald-300/20">
                     <BsWhatsapp className="text-emerald-500 text-lg" />
                   </div> <span className="font-medium underline break-words max-w-xs">{`+91 ${user.basic.phone.slice(0, 5)} ${user.basic.phone.slice(5)}`}</span>
                 </p>
-                <p className="flex items-center gap-3">
+                <p className="flex items-center w-full gap-3">
                   <div className="p-2 rounded-full bg-purple-300/20">
                     <AiOutlineMail className="text-purple-500 text-lg" />
-                  </div> <span className="font-medium underline break-words max-w-xs">{user.basic.email}</span></p>
+                  </div> <span className="font-medium underline break-words w-full">{user.basic.email}</span></p>
               </div>
               <div className="flex flex-col gap-2">
                 <p className="flex items-center gap-3"><div className="p-2 rounded-full bg-pink-300/20">

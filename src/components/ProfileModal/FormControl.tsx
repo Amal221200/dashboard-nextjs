@@ -2,7 +2,7 @@ import { user } from "../../lib/types";
 
 
 interface FormControlProps {
-    handleInput: (event: React.FormEvent<HTMLInputElement>, type: 'basic' | 'socialLinks') => void,
+    handleInput: (event: any, type: 'basic' | 'socialLinks') => void,
     data: user,
     label: string,
     id: string,

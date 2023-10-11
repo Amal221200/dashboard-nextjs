@@ -12,8 +12,14 @@ const ProfileModal = () => {
     const { user, setUser } = useUser()
     const [data, setData] = useState<user>(user!);
     const profileModal = useProfilModal()
-    const handleInput = (event: React.FormEvent<HTMLInputElement>, type: 'basic' | 'socialLinks') => {
+    const handleInput = (event: any, type: 'basic' | 'socialLinks') => {
         setData((current) => ({ ...current, [type]: { ...current[type], [event.target.name]: event.target.value } }))
+    }
+
+    const regex = {
+        phone: /[]/,
+        name: /[]/,
+        email: /[]/,
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -24,7 +30,7 @@ const ProfileModal = () => {
     }
 
     return (
-        <div className={`${profileModal.isOpen ? 'flex' : 'hidden'} absolute top-0 left-0 right-0 bottom-0 w-full h-full justify-center items-center bg-black/50 z-10`}>
+        <div className={`${profileModal.isOpen ? 'flex' : 'hidden'} overflow-hidden absolute inset-0 w-full h-full justify-center items-center bg-black/50 z-10`}>
             <div className="sm:w-fit w-full bg-primary mx-4 rounded-xl">
                 <header className="flex justify-between p-3">
                     <h1>Add New Profile</h1>

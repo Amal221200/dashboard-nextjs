@@ -1,6 +1,7 @@
 "use client";
 
-import { signIn,useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { FormEvent, useCallback, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -12,7 +13,7 @@ interface FormProps {
 
 const Form: React.FC<FormProps> = ({ title, subtitle }) => {
     const [disable, setDisable] = useState<boolean>(false)
-    console.log(useSession().status)
+    const router = useRouter()
     const handleSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
@@ -28,16 +29,17 @@ const Form: React.FC<FormProps> = ({ title, subtitle }) => {
         if (res?.ok) {
             toast.success('Signed in succesfully')
             setDisable(false);
+            router.push('/dashboard')
         }
 
-    }, [setDisable, title])
+    }, [setDisable, title, router])
     return (
         <div className="w-full flex lg:justify-center justify-end items-center h-full p-6">
             <div className="lg:w-[400px] w-[350px] md:block hidden">
                 <h2 className="text-left w-full font-bold 2xl:text-4xl text-2xl">{title}</h2>
                 <p className="text-base font-medium">{subtitle}</p>
                 <div className="flex gap-4 my-10">
-                    <button type="button" className="flex-1 bg-white rounded-lg px-4 text-[#858585] py-2 transition-colors hover:bg-[#858585] hover:text-slate-100" onClick={()=> {signIn('google')}}>Google</button>
+                    <button type="button" className="flex-1 bg-white rounded-lg px-4 text-[#858585] py-2 transition-colors hover:bg-[#858585] hover:text-slate-100" onClick={async () => { await signIn('google'); router.push('/dashboard') }}>Google</button>
                     <button type="button" className="flex-1 bg-white rounded-lg px-4 text-[#858585] py-2 transition-colors hover:bg-[#858585] hover:text-slate-100">Apple</button>
                 </div>
                 <form className="w-full flex flex-col gap-5 bg-white rounded-2xl p-10" onSubmit={handleSubmit}>
@@ -50,7 +52,7 @@ const Form: React.FC<FormProps> = ({ title, subtitle }) => {
                         <input type="password" name="password" placeholder="Enter your password" autoComplete="current-password" className="w-full px-4 py-2 bg-[#f5f5f5] rounded-md outline-none" />
                     </div>
                     <a href="#" className="">Forgot password?</a>
-                    <button type="submit" className="w-full px-4 py-2 text-center rounded-md secondary-bg transition-colors text-white hover:bg-[#426cb1]" disabled={disable}>Submit</button>
+                    <button type="submit" className="w-full px-4 py-2 text-center rounded-md bg-secondary transition-colors text-white hover:bg-[#426cb1]" disabled={disable}>Submit</button>
                 </form>
             </div>
         </div>
