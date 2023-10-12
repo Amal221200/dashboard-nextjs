@@ -22,7 +22,9 @@ const BottomRight = () => {
       {user?.basic.name && user.basic.email && user.basic.phone ?
         (
           <div className="h-full w-full" onClick={handleClick}>
+
             <h4 className="my-9 font-bold">{user.basic.name}</h4>
+            
             <div className="flex flex-wrap justify-start items-end w-full gap-5 flex-1">
               <div className="flex flex-col w-full gap-2">
                 <p className="flex items-center gap-3">
