@@ -5,6 +5,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import User from '@/models/User';
 import { connectToDB } from './database';
 import { Session } from 'next-auth'
+import { NextResponse } from 'next/server';
 
 interface newSession extends Session {
     id: string
@@ -73,6 +74,7 @@ const authOptions: AuthOptions = {
                         image: user?.image
                     })
                 }
+
                 return true;
             } catch (error) {
                 console.log(error)

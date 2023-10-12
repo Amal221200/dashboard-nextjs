@@ -21,7 +21,8 @@ const Form: React.FC<FormProps> = ({ title, subtitle }) => {
             setDisable(true);
             const userData = { email: formData.get('email'), password: formData.get('password') }
             if (title === 'Sign In') {
-                await signIn('credentials', { ...userData, callbackUrl: '/' })
+                const response = await signIn('credentials', { ...userData, callbackUrl: '/' })
+                // console.log(response?.status);
                 toast.success('Signed in succesfully');
             } else {
                 const response = await fetch(`/api/register`, {
@@ -35,8 +36,9 @@ const Form: React.FC<FormProps> = ({ title, subtitle }) => {
                 if (response?.status === 409) {
                     return toast.error("Email already exists")
                 }
-                
+
                 toast.success('Created an acount!');
+                // await signIn('credentials', { ...userData, callbackUrl: '/' })
                 router.push("/")
             }
         } catch (error: any) {

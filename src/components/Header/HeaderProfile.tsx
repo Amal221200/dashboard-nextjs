@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const HeaderProfile = () => {
     const { data, status } = useSession();
-    const [toggle, setToggle] = useState<boolean>(false)
+    const [toggle, setToggle] = useState<boolean>(false);
 
     return (
         status === "unauthenticated" ? (
@@ -20,7 +20,7 @@ const HeaderProfile = () => {
                         data?.user?.image ? (
                             <Image src={data?.user?.image!} alt="profile" width={25} height={25} className='rounded-full' />
                         ) : <div className='text-zinc-100 bg-green-700 w-[25px] h-[25px] rounded-full flex items-center justify-center'>
-                            {data?.user?.name?.at(0)}
+                            {data?.user?.email?.at(0)?.toUpperCase()}
                         </div>
                     }
                 </div>

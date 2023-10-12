@@ -8,13 +8,15 @@ export const POST = async (request: NextRequest) => {
     try {
         await connectToDB()
         const { name, email, password } = await request.json()
-        const user = await User.findOne({ email })
-
+        
+        const user = await User.findOne({ email: email })
+        
         if (user.email) {
             return NextResponse.json("Email already exists", {
                 status: 409
             })
         }
+        
         const hashedPassword = await bcrypt.hash(password, 10)
         const newUser = await User.create({ name, email, password: hashedPassword })
         return new NextResponse(JSON.stringify(newUser), {
