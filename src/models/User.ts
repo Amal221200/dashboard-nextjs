@@ -8,7 +8,6 @@ const UserSchema = new Schema({
     },
     name: {
         type: String,
-        // required: [true, 'Name is required!'],
     },
     image: {
         type: String
@@ -18,6 +17,8 @@ const UserSchema = new Schema({
     },
     role: {
         type: String,
+        enum:['admin', 'user'],
+        default: 'user'
     }
 })
 
