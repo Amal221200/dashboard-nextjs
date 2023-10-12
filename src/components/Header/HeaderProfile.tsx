@@ -1,21 +1,38 @@
 "use client";
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { TbLogout } from 'react-icons/tb';
 import { FaUserCircle } from 'react-icons/fa'
+import { useState } from 'react';
+
 const HeaderProfile = () => {
-    const { data, status } = useSession()
-    // console.log(data, status);
-    // console.log(data?.user?.image);
-    // const status: string = "d"
-    let s: [number] = [67]
+    const { data, status } = useSession();
+    const [toggle, setToggle] = useState<boolean>(false)
+
     return (
         status === "unauthenticated" ? (
             <Link href="/login"> <FaUserCircle className="text-xl text-black" /></Link>
         ) : (
-            data?.user?.image ? (
-                <Image src={data?.user?.image!} alt="profile" width={20} height={20} className='rounded-full' />
-            ) : <></>
+            <div className="relative">
+                <div className='cursor-pointer' onClick={() => setToggle((current) => !current)}>
+                    {
+                        data?.user?.image ? (
+                            <Image src={data?.user?.image!} alt="profile" width={25} height={25} className='rounded-full' />
+                        ) : <div className='text-zinc-100 bg-green-700 w-[25px] h-[25px] rounded-full flex items-center justify-center'>
+                            {data?.user?.name?.at(0)}
+                        </div>
+                    }
+                </div>
+
+                {toggle && (
+                    <div className="absolute top-[110%] right-0">
+                        <button onClick={() => signOut({ callbackUrl: '/login' })} type='button' className=' flex items-center gap-3 bg-secondary text-primary p-2 rounded-md'>
+                            <TbLogout className="text-2xl" /> Logout
+                        </button>
+                    </div>
+                )}
+            </div>
 
         )
     );

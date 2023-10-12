@@ -1,11 +1,14 @@
 import { AuthOptions } from 'next-auth';
 import bcrypt from 'bcrypt';
 import GoogleProvider from 'next-auth/providers/google';
-import { GoogleProfile } from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import User from '@/models/User';
 import { connectToDB } from './database';
+import { Session } from 'next-auth'
 
+interface newSession extends Session {
+    id: string
+}
 const authOptions: AuthOptions = {
     providers: [
         GoogleProvider({
@@ -35,11 +38,11 @@ const authOptions: AuthOptions = {
                     credentials.password,
                     user.password
                 );
-                
+
                 if (!isCorrectPassword) {
                     throw new Error('Invalid credentials');
                 }
-                
+
                 return user;
             }
         })
@@ -52,7 +55,7 @@ const authOptions: AuthOptions = {
             })
 
             if (session.user) {
-                session.user = { ...sessionUser, id: sessionUser._id.toString(), image: sessionUser.image };
+                session.user = { ...sessionUser, id: sessionUser._id.toString(), image: sessionUser.image, name: sessionUser.name, email: sessionUser.email, role: sessionUser.role };
             }
 
             return session;

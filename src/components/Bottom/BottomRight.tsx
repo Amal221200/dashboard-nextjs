@@ -12,10 +12,10 @@ const BottomRight = () => {
 
   const { user } = useUser();
 
+
   const handleClick = useCallback(() => {
     profileModal.onOpen()
   }, [profileModal]);
-  // console.log("BOTTOM", user);
 
   return (
     <CardWrapper additionalClassNames="flex-1 flex justify-center items-center">
@@ -28,32 +28,54 @@ const BottomRight = () => {
                 <p className="flex items-center gap-3">
                   <div className="p-2 rounded-full bg-emerald-300/20">
                     <BsWhatsapp className="text-emerald-500 text-lg" />
-                  </div> <span className="font-medium underline break-words max-w-xs text-sm"><a href={`tel:${user.basic.phone}`} onClick={(e) => e.stopPropagation()} target="_blank">{`+91 ${user.basic.phone.slice(0, 5)} ${user.basic.phone.slice(5)}`}</a></span>
+                  </div>
+                  <span className="font-medium underline break-words max-w-xs text-sm">
+                    <a href={`https://wa.me/91${user.basic.phone}?text=Hi`} onClick={(e) => e.stopPropagation()} target="_blank">
+                      {`+91 ${user.basic.phone.slice(0, 5)} ${user.basic.phone.slice(5)}`}
+                    </a>
+                  </span>
                 </p>
                 <p className="flex items-center w-full gap-3">
                   <div className="p-2 rounded-full bg-purple-300/20">
                     <AiOutlineMail className="text-purple-500 text-lg" />
-                  </div> <span className="font-medium underline break-words w-full text-sm"><a href={`mail:${user.basic.email}`} onClick={(e) => e.stopPropagation()} target="_blank">{user.basic.email}</a></span></p>
+                  </div>
+                  <span className="font-medium underline break-words w-full text-sm">
+                    <a href={`mailto:${user.basic.email}`} onClick={(e) => e.stopPropagation()} target="_blank">
+                      {user.basic.email}
+                    </a>
+                  </span>
+                </p>
               </div>
               <div className="flex flex-col gap-2">
-                <p className="flex items-center gap-3"><div className="p-2 rounded-full bg-pink-300/20">
-                  <AiOutlineInstagram className="text-pink-500 text-lg" />
-                </div> <span className="font-medium underline">{user.socialLinks.instagram ? <a href={user.socialLinks.instagram} onClick={(e) => e.stopPropagation()} target="_blank">{toSnakeCase(user.basic.name.toLowerCase())}</a> : 'Not Set'}</span></p>
-                <p className="flex items-center gap-3"><div className="p-2 rounded-full bg-rose-300/20">
-                  <AiOutlineYoutube className="text-rose-500 text-lg" />
-                </div> <span className="font-medium underline">{user.socialLinks.youtube ? <a href={user.socialLinks.youtube} onClick={(e) => e.stopPropagation()} target="_blank">{toSnakeCase(user.basic.name.toLowerCase())}</a> : 'Not Set'}</span></p>
+                <p className="flex items-center gap-3">
+                  <div className="p-2 rounded-full bg-pink-300/20">
+                    <AiOutlineInstagram className="text-pink-500 text-lg" />
+                  </div>
+                  <span className="font-medium underline">
+                    {user.socialLinks.instagram ? <a href={user.socialLinks.instagram} onClick={(e) => e.stopPropagation()} target="_blank">{toSnakeCase(user.basic.name.toLowerCase())}</a> : 'Not Set'}</span></p>
+                <p className="flex items-center gap-3">
+                  <div className="p-2 rounded-full bg-rose-300/20">
+                    <AiOutlineYoutube className="text-rose-500 text-lg" />
+                  </div>
+                  <span className="font-medium underline">
+                    {user.socialLinks.youtube ? <a href={user.socialLinks.youtube} onClick={(e) => e.stopPropagation()} target="_blank">{toSnakeCase(user.basic.name.toLowerCase())}
+                    </a> : 'Not Set'}
+                  </span>
+                </p>
               </div>
             </div>
           </div>
-        ) :
-        <div className="flex flex-col items-center" onClick={handleClick}>
-          <button className="bg-[#eaeaea] p-4 rounded-full">
-            <AiOutlinePlus className="text-xl text-gray-500" />
-          </button>
-          <p>Add Profile</p>
-        </div>
-      }
+        ) : 
+        (
+          <div className="flex flex-col items-center" onClick={handleClick}>
+            <button className="bg-[#eaeaea] p-4 rounded-full">
+              <AiOutlinePlus className="text-xl text-gray-500" />
+            </button>
+            <p>Add Profile</p>
+          </div>
+        )}
     </CardWrapper>
   )
 }
+
 export default BottomRight;
