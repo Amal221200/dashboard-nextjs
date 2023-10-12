@@ -1,5 +1,5 @@
 import { TopContentType } from "@/lib/types"
-import CardWrapper from "./CardWrapper"
+import CardWrapper from "../CardWrapper"
 // import { iconBgs } from "@/lib/constants";
 
 interface TopCardProps {

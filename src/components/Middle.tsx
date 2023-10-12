@@ -29,13 +29,11 @@ export const GraphDataSets = [
 ]
 
 const Middle = () => {
-  // const [mobile, stIsMobile] = useState<boolean>(false)
 
   return (
     <section className='grid grid-cols-1 my-5'>
       <CardWrapper additionalClassNames='h-[50vh] relative w-full m-auto'>
         <Bar data={{ labels: GraphDataLabels, datasets: GraphDataSets, }} options={{
-          // responsive: true,
           plugins: {
             legend: {
               position: 'top' as const,
@@ -68,7 +66,7 @@ const Middle = () => {
               }
             }
           }
-        }} className='' />
+        }} />
       </CardWrapper>
     </section>
   )

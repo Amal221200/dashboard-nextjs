@@ -4,7 +4,7 @@ import Header from "@/components/Header/Header";
 import Middle from "@/components/Middle";
 import SideBar from "@/components/SideBar";
 import Bottom from "@/components/Bottom/Bottom";
-import Top from "@/components/Top";
+import Top from "@/components/Top/Top";
 
 const Home = async () => {
 
